@@ -1,42 +1,67 @@
+/*
+    track mutations:
+    https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
+
+*/
+
 console.error('SCRIPT EXECUTION STARTS HERE')
 window.addEventListener("load", init, false);
 
+
 function init() {
-    console.log('DOM CONTENT LOADED')
-    const newCommentButton = document.querySelector('.tabs__nav')?.childNodes[2];
-    console.log('NEW COMMENT BUTTON', newCommentButton)
-    newCommentButton.addEventListener('mousedown', clickTrigger, true)
+    console.warn('DOM CONTENT LOADED')
 
-    function clickTrigger() {
-        console.log('clicked New Comment!');
-        window.addEventListener("load", loadedCommentWindow, false);
+    let observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
+            if (!mutation.addedNodes) return
+        
+            for (let i = 0; i < mutation.addedNodes.length; i++) {
+                // do things to your newly added nodes here
+                let node = mutation.addedNodes[i]
+                
+                let newCommentTab;
+                for (let section of parentContainer.childNodes) {
+                    if (section.ariaExpanded == 'true')
+                        newCommentTab = section;
+                }
 
+                let publicInputContainer = newCommentTab
+                                            ?.childNodes[0]
+                                            ?.childNodes[2]
+                                            ?.childNodes[0]
+                                            ?.childNodes[2]
+                                            ?.childNodes[2]
+                                            ?.childNodes[0]
+                                            ?.childNodes[1]
+                                            ?.childNodes[2]
+                
+                if (publicInputContainer) {
+                    console.log(node, publicInputContainer)
+                    let publicCheckbox = publicInputContainer.querySelectorAll('input')[0];
+                    console.error('PUBLICINPUTOCNTQINER FOUND')
+                    console.log(publicCheckbox)
 
-        function loadedCommentWindow() { console.error('LOADED COMMENT WINDOW!!');}
-        let parentContainer = document.querySelector('.MEDIUM.uiTabset--base.uiTabset--task.uiTabset.oneActionsComposer.forceActionsContainer');
-        let newCommentTab;
-    
-        for (let section of parentContainer.childNodes) {
-            if (section.ariaExpanded == 'true')
-                newCommentTab = section;
-        }
-    
-        let publicInputContainer = newCommentTab
-                                        ?.childNodes[0]
-                                        ?.childNodes[2]
-                                        ?.childNodes[0]
-                                        ?.childNodes[2]
-                                        ?.childNodes[2]
-                                        ?.childNodes[0]
-                                        ?.childNodes[1]
-                                        ?.childNodes[2]
-    
-        let publicCheckbox = publicInputContainer.querySelectorAll('input')[0];
-        let isPublicChecked = publicCheckbox.checked
-        if (!isPublicChecked)
-            publicContainer.querySelectorAll('input')[0].click();
-    }
+                    let isPublicChecked = publicCheckbox.checked
+                    if (!isPublicChecked) {
+                        publicCheckbox.click();
+                        break;
+                    } else {
+                        return;
+                    }
+                }
+                // console.log(node)
+            }
+        })
+    })
+      
+    let parentContainer = document.querySelector('.MEDIUM.uiTabset--base.uiTabset--task.uiTabset.oneActionsComposer.forceActionsContainer');
 
-
-
+    observer.observe(parentContainer, {
+        childList: true,
+        subtree: true,
+        attributes: false,
+        characterData: false
+    })
 }
+
+
