@@ -2,6 +2,8 @@
     track mutations:
     https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
 
+    todo:
+    - remove onLoad event listener & rely solely on MutationObserver class 
 */
 
 console.error('SCRIPT EXECUTION STARTS HERE')
