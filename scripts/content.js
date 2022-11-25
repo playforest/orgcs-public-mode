@@ -1,11 +1,11 @@
 /*
     notes:
     tracking mutations via MutationObserver class:
-    https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
+    - https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+    - https://stackoverflow.com/questions/5525071/how-to-wait-until-an-element-exists
 */
 
 window.addEventListener("load", init, false);
-
 
 function init() {
     let observer = new MutationObserver((mutations) => {
