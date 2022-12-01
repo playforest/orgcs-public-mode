@@ -3,7 +3,6 @@
     "name":"OrgCS Public",
     "version":"1.0",
     "description":"Automatically sets all interactions in orgcs to public",
-
     "content_scripts": [
         {
             "js": [
@@ -16,5 +15,9 @@
     ],
     "host_permissions":[
         "https://orgcs.lightning.force.com/*"
+    ],
+    "permissions": [
+        "tabs",
+        "activeTab"
     ]
 }
