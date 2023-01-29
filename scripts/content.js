@@ -1,13 +1,24 @@
 
 window.addEventListener("load", init, false);
 
+const updateStatus = { 
+    'enabled': true, 
+    'newStatus': 'Solution_Provided' 
+}; 
+
 function init() {
     let parentClass = 'body';
     let parentContainer = document.querySelector(parentClass);
 
+    function selectElement(element, valueToSelect) {    
+        element.value = valueToSelect;
+    }
+    
+
     parentContainer.addEventListener('mousedown', onMouseDown)
     function onMouseDown(event) {
 
+        console.log(`LOG <target.className>: ${event.target.className}`)
         if (event.target.className == 'slds-textarea') {
             let publicInputContainer = event.target
                                             ?.parentNode
@@ -18,15 +29,27 @@ function init() {
                                             ?.parentNode
                                             ?.parentNode
                                             ?.parentNode
-                                            ?.childNodes[2]
+                                            ?.parentNode
+                                            ?.parentNode
 
             if (publicInputContainer) {
-                let publicCheckbox = publicInputContainer.querySelectorAll('input')[0];
+                let publicCheckbox = publicInputContainer
+                                            ?.childNodes[2]
+                                            .childNodes[0]
+                                            .querySelectorAll('input')[0];
+
                 let isPublicChecked = publicCheckbox.checked;
 
                 if (!isPublicChecked) {
                     publicCheckbox.click();
                 } 
+                
+                if (updateStatus['enabled']) {
+                    selectElement(publicInputContainer
+                                            ?.parentNode
+                                            ?.childNodes[0]
+                                            .querySelectorAll('select')[0], updateStatus['newStatus'])
+                }
             }
         }
 
