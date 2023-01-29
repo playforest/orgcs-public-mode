@@ -2,7 +2,7 @@
 window.addEventListener("load", init, false);
 
 const updateStatus = { 
-    'enabled': true, 
+    'enabled': false, 
     'newStatus': 'Solution_Provided' 
 }; 
 
@@ -44,11 +44,13 @@ function init() {
                     publicCheckbox.click();
                 } 
                 
-                if (updateStatus['enabled']) {
-                    selectElement(publicInputContainer
+                let statusDropdown = publicInputContainer
                                             ?.parentNode
                                             ?.childNodes[0]
-                                            .querySelectorAll('select')[0], updateStatus['newStatus'])
+                                            .querySelectorAll('select')[0];
+
+                if (updateStatus['enabled']) {
+                    selectElement(statusDropdown, updateStatus['newStatus'])
                 }
             }
         }
