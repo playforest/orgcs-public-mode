@@ -2,8 +2,8 @@
 window.addEventListener("load", init, false);
 
 const updateStatus = { 
-    'enabled': false, 
-    'newStatus': 'Solution_Provided' 
+    'enabled': true, 
+    'newStatus': 'Working'    // "Solution_Provided" or "Working"
 }; 
 
 function init() {
@@ -49,7 +49,7 @@ function init() {
                                             ?.childNodes[0]
                                             .querySelectorAll('select')[0];
 
-                if (updateStatus['enabled']) {
+                if (updateStatus['enabled'] && (statusDropdown.value=='Default Choice' || statusDropdown.value == 'New')) {
                     selectElement(statusDropdown, updateStatus['newStatus'])
                 }
             }
