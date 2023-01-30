@@ -49,7 +49,7 @@ function init() {
                                             ?.childNodes[0]
                                             .querySelectorAll('select')[0];
 
-                if (updateStatus['enabled'] && (statusDropdown.value=='Default Choice' || statusDropdown.value == 'New')) {
+                if (updateStatus['enabled'] && statusDropdown.value == 'New') {
                     selectElement(statusDropdown, updateStatus['newStatus'])
                 }
             }
