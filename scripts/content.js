@@ -2,7 +2,7 @@
 window.addEventListener("load", init, false);
 
 const updateStatus = { 
-    'enabled': true, 
+    'enabled': false, 
     'newStatus': 'Working'    // "Solution_Provided" or "Working"
 }; 
 
