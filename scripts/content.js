@@ -18,7 +18,6 @@ function init() {
     parentContainer.addEventListener('mousedown', onMouseDown)
     function onMouseDown(event) {
 
-        console.log(`LOG <target.className>: ${event.target.className}`)
         if (event.target.className == 'slds-textarea') {
             let publicInputContainer = event.target
                                             ?.parentNode
